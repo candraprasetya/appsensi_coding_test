@@ -7,6 +7,7 @@ mixin Enpoints {
   static const getAccessToken = '/authentication/session/convert/4';
   static const search = '/search/movie';
   static const movie = '/movie';
+  static const topRated = '/movie/top_rated';
 }
 
 mixin ImagePath {

@@ -11,6 +11,8 @@ class HomeScreen extends StatelessWidget {
           _buildHeader(context),
           VStack(
             [
+              _buildTodayTrending(),
+              24.heightBox,
               _buildNowPlaying(),
               24.heightBox,
               _buildPopular(),
@@ -25,6 +27,51 @@ class HomeScreen extends StatelessWidget {
               .expand(),
         ],
       ),
+    );
+  }
+
+  Widget _buildTodayTrending() {
+    return BlocBuilder<TrendingBloc, TrendingState>(
+      builder: (context, state) {
+        if (state is TrendingIsSuccess) {
+          return VxSwiper(
+              aspectRatio: 16 / 9,
+              autoPlay: true,
+              autoPlayCurve: Curves.easeInOut,
+              enlargeCenterPage: true,
+              items: state.data!
+                  .map(
+                    (e) => ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: ZStack([
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: ShaderMask(
+                            shaderCallback: (rect) {
+                              return const LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Colors.black, Colors.transparent],
+                              ).createShader(Rect.fromLTRB(
+                                  0, rect.height / 2, rect.width, rect.height));
+                            },
+                            blendMode: BlendMode.dstIn,
+                            child: Image.network(
+                              'https://image.tmdb.org/t/p/w500/${e.backdropPath}',
+                              height: context.percentHeight * 30,
+                              width: context.screenWidth,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        e.title!.text.bold.make().objectBottomRight().p24(),
+                      ]),
+                    ).pSymmetric(h: 4),
+                  )
+                  .toList());
+        }
+        return 0.heightBox;
+      },
     );
   }
 

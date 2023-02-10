@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:appsensi_coding_test/src/blocs/blocs.dart';
 import 'package:appsensi_coding_test/src/cubits/set_id/set_id_cubit.dart';
 import 'package:appsensi_coding_test/src/models/models.dart';
@@ -14,3 +12,5 @@ import 'dart:async';
 part 'home_screen.dart';
 part 'show_all_screen.dart';
 part 'search_screen.dart';
+part 'detail_screen.dart';
+part 'review_screen.dart';

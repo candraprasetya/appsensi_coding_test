@@ -50,7 +50,7 @@ class DetailMovieModel {
   final String? originalTitle;
   final String? overview;
   final double? popularity;
-  final dynamic posterPath;
+  final String? posterPath;
   final List<ProductionCompany>? productionCompanies;
   final List<ProductionCountry>? productionCountries;
   final String? releaseDate;
@@ -78,7 +78,7 @@ class DetailMovieModel {
         originalTitle: json["original_title"],
         overview: json["overview"],
         popularity: json["popularity"].toDouble(),
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] ?? '',
         productionCompanies: List<ProductionCompany>.from(
             json["production_companies"]
                 .map((x) => ProductionCompany.fromMap(x))),

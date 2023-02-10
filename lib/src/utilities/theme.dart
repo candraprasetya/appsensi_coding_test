@@ -2,7 +2,7 @@ part of 'utilities.dart';
 
 ThemeData myTheme = ThemeData(
   useMaterial3: true,
-  textTheme: GoogleFonts.montserratTextTheme(),
+  textTheme: GoogleFonts.poppinsTextTheme(),
   primaryColor: colorName.primary500,
   dividerColor: colorName.neutral50,
 );
@@ -10,7 +10,7 @@ ThemeData myTheme = ThemeData(
 mixin colorName {
   static const orang500 = Color(0xFFFFAA81);
   static const primary500 = Color(0xFF47C2FF);
-  static const neutral50 = Color(0xFFEAECEE);
+  static const neutral50 = Color(0xFFf1f2f6);
   static const neutral0 = Color(0xFFFFFFFF);
   static const neutral200 = Color(0xFF9EA6AF);
   static const neutral300 = Color(0xFF727E8A);

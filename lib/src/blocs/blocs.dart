@@ -4,3 +4,6 @@ export 'movies/popular/popular_bloc.dart';
 export 'movies/search/search_bloc.dart';
 export 'movies/all_movie/all_movie_bloc.dart';
 export 'detail/detail_bloc.dart';
+export 'review/review_bloc.dart';
+export 'movies/similar/similar_bloc.dart';
+export 'movies/trending/trending_bloc.dart';

@@ -10,4 +10,8 @@ class Commons {
     String baseUrl = dotenv.get('BASE_URL', fallback: '');
     return baseUrl;
   }
+
+  static String formatDate(DateTime dateTime) {
+    return DateFormat.yMMMMd().format(dateTime);
+  }
 }

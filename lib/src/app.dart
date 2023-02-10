@@ -18,6 +18,9 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (context) => SearchBloc()),
         BlocProvider(create: (context) => SetIdCubit()),
         BlocProvider(create: (context) => DetailBloc()),
+        BlocProvider(create: (context) => SimilarBloc()),
+        BlocProvider(create: (context) => ReviewBloc()),
+        BlocProvider(create: (context) => TrendingBloc()),
       ],
       child: MaterialApp.router(
         title: "Moviiku",

@@ -8,6 +8,7 @@ final GoRouter router = GoRouter(
         BlocProvider.of<NowPlayingBloc>(context).add(FetchListNowPlaying());
         BlocProvider.of<UpcomingBloc>(context).add(FetchUpcoming());
         BlocProvider.of<PopularBloc>(context).add(FetchPopular());
+        BlocProvider.of<TrendingBloc>(context).add(FetchTrending());
         return const HomeScreen();
       },
       routes: <RouteBase>[
@@ -23,6 +24,19 @@ final GoRouter router = GoRouter(
             return ShowAllScreen();
           },
         ),
+        GoRoute(
+            path: 'detail',
+            builder: (BuildContext context, GoRouterState state) {
+              return const DetailScreen();
+            },
+            routes: [
+              GoRoute(
+                path: 'reviews',
+                builder: (BuildContext context, GoRouterState state) {
+                  return ReviewScreen();
+                },
+              ),
+            ]),
       ],
     ),
   ],

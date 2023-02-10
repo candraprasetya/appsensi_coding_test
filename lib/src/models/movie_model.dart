@@ -40,14 +40,16 @@ class MovieModel {
 
   factory MovieModel.fromMap(Map<String, dynamic> json) => MovieModel(
         posterPath: json["poster_path"] ?? '',
-        adult: json["adult"],
-        overview: json["overview"],
+        adult: json["adult"] ?? false,
+        overview: json["overview"] ?? '',
         releaseDate: json["release_date"] ?? '',
-        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+        genreIds: json["genre_ids"] == null
+            ? []
+            : List<int>.from(json["genre_ids"].map((x) => x)),
         id: json["id"],
         originalTitle: json["original_title"],
         originalLanguage: json["original_language"],
-        title: json["title"],
+        title: json["title"] ?? '',
         backdropPath: json["backdrop_path"],
         popularity: json["popularity"].toDouble(),
         voteCount: json["vote_count"],

@@ -28,10 +28,12 @@ class MovieSection extends StatelessWidget {
           ? 0.heightBox
           : HStack([
               title!.text.bold.make().expand(),
-              const Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 16,
-              ).onTap(onTap),
+              (onTap == null)
+                  ? 0.heightBox
+                  : const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 16,
+                    ).onTap(onTap),
             ]).px24(),
       16.heightBox,
       isLoading!

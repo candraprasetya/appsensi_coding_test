@@ -8,9 +8,10 @@ class DetailInitial extends DetailState {}
 class DetailIsLoading extends DetailState {}
 
 class DetailIsSuccess extends DetailState {
-  final DetailMovieModel data;
+  final DetailMovieModel? data;
+  final List<ReviewModel>? reviews;
 
-  DetailIsSuccess(this.data);
+  DetailIsSuccess({this.data, this.reviews = const []});
 }
 
 class DetailIsFailed extends DetailState {

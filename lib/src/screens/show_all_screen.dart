@@ -54,7 +54,10 @@ class ShowAllScreen extends StatelessWidget {
                     }
                   }),
                 itemBuilder: (context, index) {
-                  return MovieCard(data: movies[index]).px24();
+                  return MovieCard(
+                    data: movies[index],
+                    isPoster: false,
+                  ).px24();
                 },
                 separatorBuilder: (context, index) => 16.heightBox,
                 itemCount: movies.length,
