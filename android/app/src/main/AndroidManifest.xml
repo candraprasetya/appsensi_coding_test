@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kardusinfo.appsensi_coding_test">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="appsensi_coding_test"
         android:name="${applicationName}"

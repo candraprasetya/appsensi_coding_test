@@ -69,6 +69,22 @@ class MovieService {
     }
   }
 
+  static Future<Either<String, VideoModel>> fetchVideo(int id) async {
+    try {
+      final param = {
+        'language': 'en-US',
+      };
+      final result = await Api().get(
+          param: param,
+          "${Enpoints.movie}/$id/videos?api_key=${Commons.getApiKey()}");
+      final video = VideoModel.fromMap(result.data);
+
+      return right(video);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
+
   static Future<Either<String, ListResponseModel>> fetchPopular(
       int page) async {
     try {
@@ -78,6 +94,24 @@ class MovieService {
       };
       final result = await Api().get(
           param: param, "${Enpoints.popular}?api_key=${Commons.getApiKey()}");
+      final listReponse = ListResponseModel.fromMap(result.data);
+
+      return right(listReponse);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
+
+  static Future<Either<String, ListResponseModel>> fetchMovieByGenre(
+      int page, int genreId) async {
+    try {
+      final param = {
+        'page': page,
+        'language': 'en-US',
+      };
+      final result = await Api().get(
+          param: param,
+          "${Enpoints.discover}?api_key=${Commons.getApiKey()}&with_genres=$genreId");
       final listReponse = ListResponseModel.fromMap(result.data);
 
       return right(listReponse);

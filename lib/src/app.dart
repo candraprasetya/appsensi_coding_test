@@ -11,16 +11,17 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => SetIdCubit()),
         BlocProvider(create: (context) => NowPlayingBloc()),
         BlocProvider(create: (context) => AllMovieBloc()),
         BlocProvider(create: (context) => UpcomingBloc()),
         BlocProvider(create: (context) => PopularBloc()),
         BlocProvider(create: (context) => SearchBloc()),
-        BlocProvider(create: (context) => SetIdCubit()),
         BlocProvider(create: (context) => DetailBloc()),
         BlocProvider(create: (context) => SimilarBloc()),
         BlocProvider(create: (context) => ReviewBloc()),
         BlocProvider(create: (context) => TrendingBloc()),
+        BlocProvider(create: (context) => VideoBloc()),
       ],
       child: MaterialApp.router(
         title: "Moviiku",

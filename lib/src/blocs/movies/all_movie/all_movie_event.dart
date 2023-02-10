@@ -5,11 +5,13 @@ part of 'all_movie_bloc.dart';
 abstract class AllMovieEvent {}
 
 class FetchAllMovie extends AllMovieEvent {
-  final bool isNew;
-  final int id;
+  final bool? isNew;
+  final int? id;
+  final int? genreId;
 
   FetchAllMovie({
     this.isNew = false,
     this.id = 1,
+    this.genreId,
   });
 }

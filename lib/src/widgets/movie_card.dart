@@ -40,6 +40,8 @@ class MovieCard extends StatelessWidget {
                     .add(FetchDetailMovieById(data!.id!));
                 BlocProvider.of<SimilarBloc>(context)
                     .add(FetchSimilarByMovieId(data!.id!));
+                BlocProvider.of<VideoBloc>(context)
+                    .add(FetchVideoByMovieId(data!.id!));
                 context.go('/detail');
               })
             : HStack(

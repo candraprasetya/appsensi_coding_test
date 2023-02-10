@@ -7,3 +7,4 @@ export 'detail/detail_bloc.dart';
 export 'review/review_bloc.dart';
 export 'movies/similar/similar_bloc.dart';
 export 'movies/trending/trending_bloc.dart';
+export 'video/video_bloc.dart';

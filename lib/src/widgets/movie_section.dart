@@ -65,9 +65,11 @@ class MovieSection extends StatelessWidget {
                           data!.map((e) {
                             int i = data!.indexOf(e);
                             return (i == data!.length - 1)
-                                ? _buildShowMoreButton(context).pOnly(
-                                    left: (i == 0) ? 24 : 16,
-                                    right: (i == data!.length - 1) ? 24 : 0)
+                                ? (onTap == null)
+                                    ? 24.widthBox
+                                    : _buildShowMoreButton(context).pOnly(
+                                        left: (i == 0) ? 24 : 16,
+                                        right: (i == data!.length - 1) ? 24 : 0)
                                 : MovieCard(data: e).pOnly(
                                     left: (i == 0) ? 24 : 16,
                                     right: (i == data!.length - 1) ? 24 : 0);

@@ -13,7 +13,7 @@ class AllMovieBloc extends Bloc<AllMovieEvent, AllMovieState> {
   AllMovieBloc() : super(AllMovieInitial()) {
     on<FetchAllMovie>((event, emit) async {
       late Either<String, ListResponseModel> result;
-      if (event.isNew) {
+      if (event.isNew!) {
         page = 1;
       }
       emit(AllMovieIsLoading());
@@ -26,6 +26,9 @@ class AllMovieBloc extends Bloc<AllMovieEvent, AllMovieState> {
           break;
         case 3:
           result = await MovieService.fetchUpcoming(page);
+          break;
+        case 4:
+          result = await MovieService.fetchMovieByGenre(page, event.genreId!);
           break;
         default:
       }

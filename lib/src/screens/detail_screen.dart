@@ -21,6 +21,8 @@ class DetailScreen extends StatelessWidget {
                     .add(FetchDetailMovieById(state.data!.id!));
                 BlocProvider.of<SimilarBloc>(context)
                     .add(FetchSimilarByMovieId(state.data!.id!));
+                BlocProvider.of<VideoBloc>(context)
+                    .add(FetchVideoByMovieId(state.data!.id!));
               },
               child: VStack([
                 _buildImage(context, state.data!),
@@ -88,11 +90,17 @@ class DetailScreen extends StatelessWidget {
                 .map(
                   (e) => HStack(
                     [
-                      e.name!.text.xs.color(colorName.neutral200).make(),
+                      e.name!.text.xs.color(colorName.red500).make().onTap(() {
+                        BlocProvider.of<SetIdCubit>(context).setId(4);
+                        BlocProvider.of<AllMovieBloc>(context).add(
+                            FetchAllMovie(isNew: true, id: 4, genreId: e.id));
+
+                        context.go('/detail/all-genre');
+                      }),
                       (data.genres!.indexOf(e) == data.genres!.length - 1)
                           ? 0.heightBox
                           : VxCircle(
-                              backgroundColor: colorName.orang500,
+                              backgroundColor: colorName.neutral50,
                               radius: 6,
                             ).pSymmetric(h: 6)
                     ],
@@ -140,26 +148,57 @@ class DetailScreen extends StatelessWidget {
   }
 
   Widget _buildImage(BuildContext context, DetailMovieModel data) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: ShaderMask(
-        shaderCallback: (rect) {
-          return const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.black, Colors.transparent],
-          ).createShader(
-              Rect.fromLTRB(0, rect.height / 2, rect.width, rect.height));
-        },
-        blendMode: BlendMode.dstIn,
-        child: Image.network(
-          'https://image.tmdb.org/t/p/w500/${data.backdropPath}',
-          height: context.percentHeight * 30,
-          width: context.screenWidth,
-          fit: BoxFit.cover,
-        ),
-      ),
-    ).pSymmetric(v: 16, h: 24);
+    return BlocBuilder<VideoBloc, VideoState>(
+      builder: (context, state) {
+        if (state is VideoIsSuccess) {
+          return (state.data.results!.isEmpty)
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: ShaderMask(
+                    shaderCallback: (rect) {
+                      return const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.black, Colors.transparent],
+                      ).createShader(Rect.fromLTRB(
+                          0, rect.height / 2, rect.width, rect.height));
+                    },
+                    blendMode: BlendMode.dstIn,
+                    child: Image.network(
+                      'https://image.tmdb.org/t/p/w500/${data.backdropPath}',
+                      height: context.percentHeight * 30,
+                      width: context.screenWidth,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ).pSymmetric(v: 16, h: 24)
+              : VxSwiper(
+                      aspectRatio: 16 / 9,
+                      enlargeCenterPage: true,
+                      height: context.percentHeight * 24,
+                      items: state.data.results!
+                          .map(
+                            (e) => ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: YoutubePlayer(
+                                aspectRatio: 16 / 9,
+                                controller: YoutubePlayerController(
+                                  initialVideoId: e.key!,
+                                  flags: const YoutubePlayerFlags(
+                                    autoPlay: false,
+                                    showLiveFullscreenButton: false,
+                                    disableDragSeek: true,
+                                  ),
+                                ),
+                              ),
+                            ).pSymmetric(h: 4),
+                          )
+                          .toList())
+                  .pOnly(bottom: 24);
+        }
+        return 0.heightBox;
+      },
+    );
   }
 
   Widget _boxContent(String value, String title) {

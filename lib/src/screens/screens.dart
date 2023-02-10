@@ -9,6 +9,8 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:async';
 
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 part 'home_screen.dart';
 part 'show_all_screen.dart';
 part 'search_screen.dart';

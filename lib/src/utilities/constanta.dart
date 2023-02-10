@@ -8,6 +8,7 @@ mixin Enpoints {
   static const search = '/search/movie';
   static const movie = '/movie';
   static const topRated = '/movie/top_rated';
+  static const discover = '/discover/movie';
 }
 
 mixin ImagePath {

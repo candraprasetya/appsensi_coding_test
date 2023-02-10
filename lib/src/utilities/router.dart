@@ -36,6 +36,12 @@ final GoRouter router = GoRouter(
                   return ReviewScreen();
                 },
               ),
+              GoRoute(
+                path: 'all-genre',
+                builder: (BuildContext context, GoRouterState state) {
+                  return ShowAllScreen();
+                },
+              ),
             ]),
       ],
     ),
